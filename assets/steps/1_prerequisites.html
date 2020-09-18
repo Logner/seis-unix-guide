@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+        <title>Blank Page</title>
+        <link rel="icon" type="image/png" href="favicon.png"/>
+        <link rel='stylesheet' href='./assets/css/style.css'>
+    </head>
+    <body>
+        <header>
+            <h1 class="header-item">A <a href=index.html>Seismic Unix Guide</a>
+                compiled by <a href='https://cresrc.ca'>CRESRC</a>
+            </h1>
+            <nav class="header-item">
+                    <a href='index.html'><h2>Index</h2></a>
+                <ul class='nav-container'>
+                    <li class='nav-item'>
+                        <a href="assets/steps/0_intro.html">Introduction</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a href="assets/steps/1_prerequisites.html">Prerequisites</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a href="assets/steps/2_terminals.html">Linux Terminals</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a href="assets/steps/3_shell-scripts.html">Shell Scripting</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a href="assets/steps/4_seis-unix-general.html">Seismic Unix</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a href="assets/steps/5_seis-unix-functions.html">Seismic Unix - Functions</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a href="assets/steps/6_sample-workflow.html">Sample Workflow</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a href="assets/steps/7_sample-data.html">Sample Data</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+                <h1 id="prerequisites-for-the-windows-10-install">Prerequisites for the Windows 10 Install</h1>
+                <h2 id="windows-powershell">Windows Powershell</h2>
+                <p>​    <img src="" alt="An image of Microsoft Powershell"></p>
+                <p>There is a huge difference between the commands used to operate the windows terminal (Power Shell) terminal and Linux (BASH and others) terminals.  Since SU is Unix based technology, we will need to get access to the Ubuntu shell on our preexisting windows machine. </p>
+                <p>The easiest way to do this, is to install the recently (in 2019) introduced Ubuntu subsystem for windows. <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">This guide</a> has an in-depth walk through. But we&#39;ll do the quick version here.</p>
+                <ol>
+                <li><p>Open Windows Powershell an an Administrator through the Start Menu.</p>
+                </li>
+                <li><p>Run this command <code>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</code> . Feel free to just copy and paste the code into Powershell.</p>
+                <ul>
+                <li>The command is used to enable the Linux subsystem for all users on the windows computer.</li>
+                <li>This will take a few minutes depending on your processor. it should look like this when completed: <img src="" alt="Finished initialisation process on Powershell"></li>
+                </ul>
+                </li>
+                </ol>
+                <h2 id="the-ubuntu-subsystem-for-windows">The Ubuntu Subsystem for Windows</h2>
+                <p>​            <img src="" alt="An image of the Ubuntu subsystem as found in the Windows app store"></p>
+                <ol>
+                <li><p>Install the Ubuntu subsystem for windows from the windows app store.</p>
+                </li>
+                <li><p>Get <a href="https://sourceforge.net/projects/xming/">Xming</a>. This must be running before the Ubuntu Shell is initialised for it to work.</p>
+                <ul>
+                <li><p>This program allows the Ubuntu subsystem to create graphical windows on Windows 10. It is necessary to display SU data.</p>
+                </li>
+                <li><p>It is a lightweight program so it is a good idea to add it to your startup programs list. You can follow the proceeding steps to accomplish this.</p>
+                <ol>
+                <li>Run XLaunch.exe from the start menu and save the configuration as config.xlaunch under the startup folder.<ul>
+                <li><code>C:\Users\*YOUR USERNAME HERE*\AppData\Roaming\Microsoft\Windows\&quot;Start Menu&quot;\Programs\Startup</code></li>
+                </ul>
+                </li>
+                <li><p>Create a shortcut of XLaunch.exe under the same startup folder.</p>
+                </li>
+                <li><p>Modify the target field of the shortcut to <code>&quot;C:\*PATH\TO\Xming*\XLaunch.exe&quot; -run &quot;config.xlaunch&quot;.</code></p>
+                </li>
+                </ol>
+                <p><img src="" alt="An image of SU output using an Xming window"></p>
+                </li>
+                </ul>
+                </li>
+                <li><p>Open the Ubuntu subsystem from the Start Menu. Set the username and password once Ubuntu is fully installed.</p>
+                <ul>
+                <li>Needless to say, don&#39;t forget these!</li>
+                </ul>
+                </li>
+                <li><p>run <code>sudo apt-get update;sudo apt-get upgrade</code> in the Ubuntu shell.</p>
+                <ul>
+                <li>In all terminals, a space indicates a separate entity or a command. Best convention is to name your folders with underscored &quot;_&quot; or  dashes &quot;-&quot;. Otherwise, you will have to put quotes around your filenames for them to be considered a single variable.</li>
+                <li>The above commands can be broken up into 3 parts:<ul>
+                <li><code>sudo</code> : Grants the user root (administrator) privileges, provided the correct password is entered.</li>
+                <li><code>apt-get</code> : <a href="https://en.wikipedia.org/wiki/APT_(software">Advanced Package Tool</a>) is a Debian (bare bones-Linux) based free-software library</li>
+                <li><code>update</code> : Asks the apt server whether the location for updates of the currently-installed packages has changed, and if yes, then it changes the URL on the local machine.</li>
+                <li><code>;</code> : Acts as a new-line character, it separates the 2 commands</li>
+                <li><code>upgrade</code> : Checks if new versions of the installed packages are available, and installs them.</li>
+                </ul>
+                </li>
+                </ul>
+                </li>
+                <li><p>run <code>cd; echo &quot;export DISPLAY=:0&quot; &gt;&gt; .bashrc; source .bashrc</code> in the Ubuntu shell.</p>
+                <ul>
+                <li><p><code>cd</code> : by itself changes your current working directory to <code>/home/*username*/</code>  aka  <code>~</code></p>
+                <ul>
+                <li>Read <a href="https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/">this</a> for more information on the Linux directory structure. and <a href="https://www.redhat.com/sysadmin/basic-linux-commands">this</a> for more information on the basic Linux command syntax.</li>
+                </ul>
+                </li>
+                <li><p><code>echo &quot;export DISPLAY=:0&quot; &gt;&gt; .bashrc</code> : this is a 3-part command. It writes &quot;export Display=:0&quot; into .bashrc</p>
+                <ul>
+                <li><p><code>echo</code> : std-out the next variable. (This means print it out to the console.)</p>
+                </li>
+                <li><p><code>&quot;export DISPLAY=:0&quot;</code> : the line to be written into <code>.bashrc</code>. This line allows the Xming windows to function properly.</p>
+                </li>
+                <li><p><code>&gt;&gt;</code> : capture the std-out from previous command (<code>echo</code>) and write it at the bottom of the following file</p>
+                </li>
+                <li><p><code>.bashrc</code> : A file that has all the configuration information for how the BASH shell is initialised for the current Linux user.</p>
+                <blockquote>
+                <p>the <code>.</code> in front of the <code>.bashrc</code> makes the file a hidden file. Try running <code>ls -A</code> in the <code>~</code> directory to see all the hidden files.</p>
+                </blockquote>
+                </li>
+                </ul>
+                </li>
+                <li><p><code>source .bashrc</code>:  this command executes the code stored in .bashrc. Be careful as system-relevant variables are stored in .bashrc and <strong>a slight syntax mistake can lead to A LOT of headaches</strong>.</p>
+                </li>
+                </ul>
+                </li>
+                </ol>
+                <h2 id="get-a-file-explorer-gui-for-the-ubuntu-subsystem-optional-">Get a File Explorer GUI for the Ubuntu Subsystem (optional)</h2>
+                <p>This part is optional, but <b>Highly Recommended.</b></p>
+                <ul>
+                <li><p>run <code>sudo apt-get install nautilus</code></p>
+                <ul>
+                <li>Nautilus is the default file browser GUI (Graphical user interface)  on Ubuntu Installations. Since we already have Xming running, nautilus</li>
+                </ul>
+                </li>
+                <li><p>Save the windows folder system location to favourites in Nautilus.  </p>
+                <ul>
+                <li>run <code>nautilus /mnt/c/users/*WINDOWS USERNAME*/</code>  to open nautilus in your user directory. </li>
+                <li>Right click and save to bookmarks via the <img src="" alt="three horizontal bars symbol">.</li>
+                <li>Right click on that favourite folder (should show up at the bottom of the folders list on the left hand side) and open as a new tab.</li>
+                </ul>
+                </li>
+                <li><p>Running nautilus on startup, persistently keep it open.
+                <strong>Beware! This requires editing with Ubuntu system files. Worst case scenario at this point is having to reset or uninstall the Ubuntu install and repeating all the steps after step 3</strong></p>
+                <ul>
+                <li><p>Doing this will keep one window of nautilus open until you have logged out of the Ubuntu. It will auto-restart on closing. We will be using <a href="https://medium.com/@benmorel/creating-a-linux-service-with-systemd-611b5c8b91d6">services</a> to accomplish this. </p>
+                <ul>
+                <li>This will be useful later, since windows cant directly talk to Ubuntu system. It is very useful to have a persistent GUI open that does not constantly log out error messages in the console. Transferring files between the two OS&#39;s is much easier with a GUI.</li>
+                </ul>
+                </li>
+                <li><p>run <code>sudo touch /etc/systemd/system/AutoNautilus.service</code></p>
+                <ul>
+                <li>this will create a new file called <code>AutoNautilus.service</code> under <code>/etc/systemd/system/</code></li>
+                </ul>
+                </li>
+                <li><p>run <code>sudo nano /etc/systemd/system/AutoNautilus.service</code></p>
+                <ul>
+                <li>this will open an in-terminal editor</li>
+                </ul>
+                </li>
+                <li><p>copy and paste the following: </p>
+                <pre><code class="lang-shell"><span class="hljs-section">[Unit]</span>
+                <span class="hljs-attr">Description</span>=<span class="hljs-string">'Starting Nautilus on startup, persistently keep it open'</span>
+                <span class="hljs-attr">StartLimitIntervalSec</span>=<span class="hljs-number">0</span>
+                <span class="hljs-section">
+                [Service]</span>
+                <span class="hljs-attr">Type</span>=simple
+                <span class="hljs-attr">Restart</span>=always
+                <span class="hljs-attr">RestartSec</span>=<span class="hljs-number">1</span>
+                <span class="hljs-attr">User</span>=*USERNAME EDIT THIS*
+                <span class="hljs-comment">## the part that starts nautilus at the home directory ##</span>
+                <span class="hljs-attr">ExecStart</span>=/bin/bash /usr/bin/nautilus ~
+                <span class="hljs-section">
+                [Install]</span>
+                <span class="hljs-attr">WantedBy</span>=multi-user.target
+                </code></pre>
+                </li>
+                <li><p><code>Ctrl+o</code> to save, and <code>Ctrl+x</code> to exit out of the nano session.</p>
+                </li>
+                <li><p><code>systemctl start AutoNautilus; systemctl enable AutoNautilus</code> to start and toggle start on startup the service.</p>
+                </li>
+                </ul>
+                </li>
+                </ul>
+                <h2 id="you-made-it-">You made it!</h2>
+                <p>Good job! Now that our windows computer is sufficiently set up to install Seismic Unix, lets actually install it!</p>
+
+        </section>
+        <footer>
+
+        </footer>
+    </body>
+</html>
