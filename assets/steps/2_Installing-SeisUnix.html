@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+        <title>Blank Page</title>
+        <link rel="icon" type="image/png" href="favicon.png"/>
+        <link rel='stylesheet' href='../css/style.css'>
+    </head>
+    <body>
+        <header>
+            <script src='../js/nav_maker.js'></script>
+        </header>
+        <section>
+                <h1 id="installing-seismic-unix">Installing Seismic Unix</h1>
+                <p>This process will be the same for windows and Ubuntu/other debian based linux operating systems. First download the latest Seismic Unix release from <a href="https://wiki.seismic-unix.org/doku.php">here</a>. That link also contains links to the Oz Yilmaz data set that will be used for this guide in the next steps.</p>
+                <ol>
+                <li>run <code>cd ~; echo &quot;export CWPROOT=\$HOME&quot; &gt;&gt; .bashrc; echo &quot;export PATH=\$PATH:\$HOME/bin:./&quot; &gt;&gt; .bashrc; source .bashrc</code> <ul>
+                <li>this command will set a variable called CWPROOT which is used for the SU installation</li>
+                <li>adds /home/bin to the path (where the SU scripts will be stored later)</li>
+                <li>runs the .bashrc file</li>
+                </ul>
+                </li>
+                <li>Download the latest <a href="https://wiki.seismic-unix.org/doku.php">Seismic Unix release</a> and move it to the home directory.<ul>
+                <li>for windows you can run the following commands in the terminal:<ul>
+                <li><code>cd /mnt/c/users/$YOUR_USERNAME_HERE/Downloads; mv cwp_su_all_$VERSION#.tgz $home/cwp_su_all_$VERSION#.tgz; cd $HOME</code></li>
+                </ul>
+                </li>
+                <li>for mac or linux:<ul>
+                <li><code>cd ~/Downloads/; mv cwp_su_all_$VERSION#.tgz $home/cwp_su_all_$VERSION#.tgz; cd $HOME</code></li>
+                </ul>
+                </li>
+                </ul>
+                </li>
+                <li>run <code>gunzip cwp_su_all_$VERSION#.tgz; tar -xvf cwp_su_all_$VERSION#.tar</code><ul>
+                <li>the above commands will extract the installation files from the .tgz into the current active directory</li>
+                </ul>
+                </li>
+                <li>Use the correct installation makefile.config.<ul>
+                <li>for most systems the Makefile.config_Linux_x86_64 will work.</li>
+                <li>running <code>cd ~/src ; rm -f Makefile.config / cp ~/configs/Makefile.config_Linux_x86_64 Makefile.config</code> will accomplish this in the terminal</li>
+                </ul>
+                </li>
+                <li>Install the Required Packages
+                run <code>sudo apt-get update; sudo apt-get upgrade; sudo apt-get install build-essential gfortran libx11-dev libxt-dev</code></li>
+                <li>Install optional packages:<ul>
+                <li>OpenGL:<code>sudo apt-get install freeglut3-dev libxmu-dev libxi-dev libc6</code></li>
+                <li>Motif: <code>sudo apt-get install libuil4 libmotif-dev</code></li>
+                </ul>
+                </li>
+                <li>Make sure everything is updated via: <code>sudo apt-get update; sudo apt-get upgrade</code></li>
+                <li>Install SU: <code>cd ~/src; make install; make xtinstall; make finstall</code><ul>
+                <li>Optional Installation: <code>make mglinstall; make utils; make xminstall; make sfinstall</code></li>
+                </ul>
+                </li>
+                <li>Test SU installation: <code>suplane | suximage title=&#39;test&#39;</code></li>
+                </ol>
+                <p>I have compiled above information from the following sources: <a href="https://wiki.seismic-unix.org/sudoc:su_installation">SU Wiki Install guide</a>; <a href="https://suwindows10.blogspot.com/2016/08/how-to-install-seismic-unix-su-on.html">This blog talking about SU installation on Windows</a>.</p>                
+        </section>
+        <footer>
+
+        </footer>
+    </body>
+</html>

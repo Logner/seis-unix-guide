@@ -5,42 +5,11 @@
         <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
         <title>Blank Page</title>
         <link rel="icon" type="image/png" href="favicon.png"/>
-        <link rel='stylesheet' href='./assets/css/style.css'>
+        <link rel='stylesheet' href='../css/style.css'>
     </head>
     <body>
         <header>
-            <h1 class="header-item">A <a href=index.html>Seismic Unix Guide</a>
-                compiled by <a href='https://cresrc.ca'>CRESRC</a>
-            </h1>
-            <nav class="header-item">
-                    <a href='index.html'><h2>Index</h2></a>
-                <ul class='nav-container'>
-                    <li class='nav-item'>
-                        <a href="assets/steps/0_intro.html">Introduction</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a href="assets/steps/1_prerequisites.html">Prerequisites</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a href="assets/steps/2_terminals.html">Linux Terminals</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a href="assets/steps/3_shell-scripts.html">Shell Scripting</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a href="assets/steps/4_seis-unix-general.html">Seismic Unix</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a href="assets/steps/5_seis-unix-functions.html">Seismic Unix - Functions</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a href="assets/steps/6_sample-workflow.html">Sample Workflow</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a href="assets/steps/7_sample-data.html">Sample Data</a>
-                    </li>
-                </ul>
-            </nav>
+            <script src='../js/nav_maker.js'></script>
         </header>
         <section>
                 <h1 id="prerequisites-for-the-windows-10-install">Prerequisites for the Windows 10 Install</h1>
@@ -70,7 +39,7 @@
                 <li><p>It is a lightweight program so it is a good idea to add it to your startup programs list. You can follow the proceeding steps to accomplish this.</p>
                 <ol>
                 <li>Run XLaunch.exe from the start menu and save the configuration as config.xlaunch under the startup folder.<ul>
-                <li><code>C:\Users\*YOUR USERNAME HERE*\AppData\Roaming\Microsoft\Windows\&quot;Start Menu&quot;\Programs\Startup</code></li>
+                <li><code>C:\Users\$YOUR_USERNAME_HERE\AppData\Roaming\Microsoft\Windows\&quot;Start Menu&quot;\Programs\Startup</code></li>
                 </ul>
                 </li>
                 <li><p>Create a shortcut of XLaunch.exe under the same startup folder.</p>
@@ -137,8 +106,8 @@
                 </li>
                 <li><p>Save the windows folder system location to favourites in Nautilus.  </p>
                 <ul>
-                <li>run <code>nautilus /mnt/c/users/*WINDOWS USERNAME*/</code>  to open nautilus in your user directory. </li>
-                <li>Right click and save to bookmarks via the <img src="" alt="three horizontal bars symbol">.</li>
+                <li>run <code>nautilus /mnt/c/users/$YOUR_WINDOWS_USERNAME/</code>  to open nautilus at your windows users directory. </li>
+                <li>Save the folder to bookmarks via the <img src="" alt="three horizontal bars symbol">.</li>
                 <li>Right click on that favourite folder (should show up at the bottom of the folders list on the left hand side) and open as a new tab.</li>
                 </ul>
                 </li>
@@ -179,13 +148,13 @@
                 </li>
                 <li><p><code>Ctrl+o</code> to save, and <code>Ctrl+x</code> to exit out of the nano session.</p>
                 </li>
-                <li><p><code>systemctl start AutoNautilus; systemctl enable AutoNautilus</code> to start and toggle start on startup the service.</p>
+                <li><p>run <code>systemctl start AutoNautilus; systemctl enable AutoNautilus</code> to start and toggle start on startup the service.</p>
                 </li>
                 </ul>
                 </li>
                 </ul>
                 <h2 id="you-made-it-">You made it!</h2>
-                <p>Good job! Now that our windows computer is sufficiently set up to install Seismic Unix, lets actually install it!</p>
+                <p>Good job! Now that our windows computer is sufficiently set up to install Seismic Unix, so lets actually install it!</p>                
 
         </section>
         <footer>

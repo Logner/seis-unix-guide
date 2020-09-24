@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+        <title>Blank Page</title>
+        <link rel="icon" type="image/png" href="favicon.png"/>
+        <link rel='stylesheet' href='../css/style.css'>
+    </head>
+    <body>
+        <header>
+            <script src='../js/nav_maker.js'></script>
+        </header>
+        <section>
+                <h1 id="seis-unix-syntax-and-functions">Seis Unix Syntax and Functions</h1>
+                <h2 id="understanding-su-syntax">Understanding SU syntax</h2>
+                <p>Seismic Unix functions operate based on std-in and std-out functionality of the terminal. </p>
+                <ul>
+                <li>std-in and std-out stand for standard stream in/out respectively. Any time a command outputs something to the terminal. The output goes to the terminal in the form of std-out. SeisUnix commands take advantage of both std in and stdout.</li>
+                <li><code>&gt;</code> - storing std-out to this file and <code>&lt;</code> - take std-in from this file.<ul>
+                <li>usage: <code>sugain agc=1 &lt; input.su &gt; output.su</code></li>
+                </ul>
+                </li>
+                <li><code>|</code> - Pipe to next command.<ul>
+                <li>usage: <code>suplane | suximage perc=90</code> (takes std-out from suplane and directly funnels it into suximage)</li>
+                </ul>
+                </li>
+                <li>combined usage: <code>sugain &lt; input.su | sunmo tnmo=0,1,2 vnmo=1000,2000,3000 | susort +cdp +offset &gt; output.su</code><ul>
+                <li>input gets gained, output from sugain gets some velocities applied to it, velocities get sorted, and an output is produced as an su file.</li>
+                <li>A benefit of doing it this way is that none of the intermediate files are saved to your hard-drive. This is a trade-off if you wanted to see exactly what was going on during those intermediary steps.</li>
+                </ul>
+                </li>
+                </ul>
+                <h2 id="help-and-documentation-functions">Help and Documentation functions</h2>
+                <ul>
+                <li><code>sudoc $COMMANDNAME</code> - Useful for finding the most descriptive information available about a specific command</li>
+                <li><code>sufind $COMMANDNAME</code> - Useful for finding more information about a specific command</li>
+                <li><code>suhelp</code> - Generates a list of all available commands based on their functionality</li>
+                </ul>
+                <h2 id="su-usage">SU Usage</h2>
+                <p>The following commands are the ones I have personally found useful in the last 3 months I spent learning SU. A quick disclaimer: SU has much more functionality than the handful of commands I mention here. These are just the ones I have used when processing a seismic line.</p>
+                <p><strong>See sudoc  for more info</strong> about the commands mentioned below or throughout the guide.</p>
+                <h3 id="converting-between-seg-y-and-su">Converting between SEG-Y and SU</h3>
+                <ul>
+                <li><code>segyread tape=$SEGY_FILE verbose=1 endian=0 | segyclean &gt; data.su</code><ul>
+                <li>takes in an input segy file from the tape parameter. verbose 1 means to display error or other log messages. endian=0 is a pretty important configuration. You can read about in greater detail <a href="https://chortle.ccsu.edu/AssemblyTutorial/Chapter-15/ass15_3.html">here</a>. Most personal computers are Little Endian machines hence endian=0 in our case.</li>
+                </ul>
+                </li>
+                <li><code>segyhdrs</code>
+                - </li>
+                <li><code>segywrite</code><ul>
+                <li></li>
+                </ul>
+                </li>
+                </ul>
+                <h3 id="header-commands">Header Commands</h3>
+                <ul>
+                <li><p><code>surange &lt; data.su</code>  </p>
+                <ul>
+                <li>Used to check all non-zero/non-Null headers in our dataset. Displays the min and max values</li>
+                </ul>
+                </li>
+                <li><p><code>sushw &lt;indata.su &gt;modified_headers.su key1=$KEY ...</code>  </p>
+                <ul>
+                <li>This a pretty comprehensive program used to manipulate header values in the header.</li>
+                <li>variable a is used to shift the variable up or down by the integer provided in a.</li>
+                <li>variable d is used to refer to the increment between header values.</li>
+                <li>example: if our cdp values start at 20 and go up by 3 and we want them to start at 1 and increment by 1 we would run: <code>sushw &lt;input.su key=cdp a=-19 d=3 | sushw &gt; output.su key=cdp a=1</code> .</li>
+                </ul>
+                </li>
+                <li><code>sukeyrange -o &gt; sukeys.txt</code>  <ul>
+                <li>Displays all available header variables and their descriptions. This makes a good outputfile. It is data-agnostic (doesnt need any specific input), specific to headers used by the SU framework.</li>
+                </ul>
+                </li>
+                <li><code>sugethw &lt; input.su &gt; header_values.txt key=tracl,fldr,cdp,ep</code><ul>
+                <li>outputs the header values for keys selected by the key variable into header_values.txt. This is a useful command for troubleshooting and understanding the order of headers in seismic unix.</li>
+                </ul>
+                </li>
+                </ul>
+                <h3 id="plotting-commands">Plotting commands</h3>
+                <ul>
+                <li><code>suximage &lt; data.su</code> <ul>
+                <li>Display the seismic line from data.su in an x-window raster format.</li>
+                </ul>
+                </li>
+                <li><code>suxwigb &lt; data.su</code> <ul>
+                <li>Display the seismic line from data.su in an x-window wiggle format.</li>
+                </ul>
+                </li>
+                <li><code>suwind &lt; data.su key=$KEY min=$MIN max=$MAX tmin=$mintime tmax=$maxtime &gt;windowed_data.su</code> <ul>
+                <li>Window the seismic line from data.su in so that only the selected portion of $KEY is recorded. Could be cdps (cdp), trace number (tracl) or any other key found from surange.</li>
+                </ul>
+                </li>
+                </ul>
+                <p>The next section will contain a shell file with a typical seismic data workflow. going from raw shot gather data in su format and converting it into a stacked line that is cdp sorted, migrated and has some statics applied. We will also talk more about the processing commands used for that workflow in that section.</p>
+                
+
+        </section>
+        <footer>
+
+        </footer>
+    </body>
+</html>
