@@ -8,10 +8,10 @@ This process will be the same for windows and Ubuntu/other debian based linux op
    - runs the .bashrc file
 2. Download the latest [Seismic Unix release](https://wiki.seismic-unix.org/doku.php) and move it to the home directory.
    - for windows you can run the following commands in the terminal:
-     - `cd /mnt/c/users/*YOUR USERNAME HERE*/Downloads; mv cwp_su_all_*VERSION#*.tgz $home/cwp_su_all_*VERSION#*.tgz; cd $HOME`
+     - `cd /mnt/c/users/$YOUR_USERNAME_HERE/Downloads; mv cwp_su_all_$VERSION#.tgz $home/cwp_su_all_$VERSION#.tgz; cd $HOME`
    - for mac or linux:
-     - `cd ~/Downloads/; mv cwp_su_all_*VERSION#*.tgz $home/cwp_su_all_*VERSION#*.tgz; cd $HOME `
-3.  run `gunzip cwp_su_all_*VERSION#*.tgz; tar -xvf cwp_su_all_*VERSION#*.tar`
+     - `cd ~/Downloads/; mv cwp_su_all_$VERSION#.tgz $home/cwp_su_all_$VERSION#.tgz; cd $HOME `
+3.  run `gunzip cwp_su_all_$VERSION#.tgz; tar -xvf cwp_su_all_$VERSION#.tar`
    - the above commands will extract the installation files from the .tgz into the current active directory
 4. Use the correct installation makefile.config.
    - for most systems the Makefile.config_Linux_x86_64 will work.
@@ -28,4 +28,4 @@ This process will be the same for windows and Ubuntu/other debian based linux op
 
 
 
-I have compiled this information from these sources: [SU Wiki Install guide](https://wiki.seismic-unix.org/sudoc:su_installation); [This blog talking about SU installation on Windows](https://suwindows10.blogspot.com/2016/08/how-to-install-seismic-unix-su-on.html).
+I have compiled above information from the following sources: [SU Wiki Install guide](https://wiki.seismic-unix.org/sudoc:su_installation); [This blog talking about SU installation on Windows](https://suwindows10.blogspot.com/2016/08/how-to-install-seismic-unix-su-on.html).

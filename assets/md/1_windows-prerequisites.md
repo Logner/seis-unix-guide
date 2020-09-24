@@ -30,7 +30,7 @@ The easiest way to do this, is to install the recently (in 2019) introduced Ubun
    - It is a lightweight program so it is a good idea to add it to your startup programs list. You can follow the proceeding steps to accomplish this.
 
      1. Run XLaunch.exe from the start menu and save the configuration as config.xlaunch under the startup folder.
-        - ` C:\Users\*YOUR USERNAME HERE*\AppData\Roaming\Microsoft\Windows\"Start Menu"\Programs\Startup`
+        - ` C:\Users\$YOUR_USERNAME_HERE\AppData\Roaming\Microsoft\Windows\"Start Menu"\Programs\Startup`
      2. Create a shortcut of XLaunch.exe under the same startup folder.
 
      3. Modify the target field of the shortcut to `"C:\*PATH\TO\Xming*\XLaunch.exe" -run "config.xlaunch".`
@@ -81,7 +81,7 @@ This part is optional, but <b>Highly Recommended.</b>
 
 - Save the windows folder system location to favourites in Nautilus.  
 
-  - run `nautilus /mnt/c/users/*YOUR WINDOWS USERNAME*/`  to open nautilus at your windows users directory. 
+  - run `nautilus /mnt/c/users/$YOUR_WINDOWS_USERNAME/`  to open nautilus at your windows users directory. 
   - Save the folder to bookmarks via the ![three horizontal bars symbol]().
   - Right click on that favourite folder (should show up at the bottom of the folders list on the left hand side) and open as a new tab.
 
