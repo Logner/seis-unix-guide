@@ -15,7 +15,7 @@ var generateNavbarList = function() {
         li.className = 'nav-item'
 
         link = document.createElement('a');
-        link.setAttribute('href', '/assets/steps/'+text+'.html');
+        link.setAttribute('href', '/seis-unix-guide/assets/steps/'+text+'.html');
         link.textContent = readableText;
 
         li.appendChild(link)
