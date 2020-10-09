@@ -1,5 +1,5 @@
 var pages = ['0_Introduction', '1_Windows-prerequisites', '2_Installing-SeisUnix', 
-            '3_SeisUnix', '4_Sample-workflow', '5_Sample-data'];
+            '3_SeisUnix', '4_Scripts-Explained', '5_Available-Data'];
 var header = document.querySelector('header');
 var headerTitleHTML = "<a href=/seis-unix-guide/index.html>The beginner's guide to Seismic Unix</a>\
                         made by <a href='https://cresrc.ca'>CRESRC"
@@ -34,7 +34,7 @@ var populateHeader = function () {
     navbar.classname = 'header-item';
 
     title.innerHTML = headerTitleHTML;
-    navbar.innerHTML = "<a href='/index.html'><h2>Index</h2></a>"
+    navbar.innerHTML = "<a href='/seis-unix-guide/index.html'><h2>Index</h2></a>"
 
     var links = generateNavbarList();
 

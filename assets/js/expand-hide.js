@@ -6,7 +6,7 @@ console.log(containers)
 var expandChildrenLists = function(link) {
     ul = link.querySelector('ul');
 
-    b = link.querySelector('b');
+    b = link.querySelector('.expand-hide');
     if (b.textContent == '+') {
         ul.removeAttribute('style');
         ul.setAttribute('style', 'display:block')
@@ -51,11 +51,11 @@ var primaryListLogic = function (primaryListEl) {
         bulletPts += links[k];
 
         // start collapsed
-        links[k].innerHTML = '<b>+</b>'+links[k].innerHTML;
+        links[k].innerHTML = '<button class="expand-hide">+</button>'+links[k].innerHTML;
         links[k].querySelector('ul').setAttribute('style','display:none;')
 
         // adding expand logic
-        links[k].querySelector('b').addEventListener('click', expandLogic);
+        links[k].querySelector('.expand-hide').addEventListener('click', expandLogic);
         }
         else {
             links[k].innerHTML = '<b>•</b>'+links[k].innerHTML;

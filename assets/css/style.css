@@ -134,19 +134,27 @@ section {
 }
 
 .primary-list li b{
-    padding: 0.1rem 0.3rem;
-    margin-bottom: 0.5rem;
-    font-size:1.5rem;
-    
-    background-color:var(--accent);
+    margin-right: 1.5rem;
+}
 
-    border-radius:10px;
-    margin-right:20px;
+.expand-hide {
+    margin-right: 1.5rem;
+    width: 1rem;
+
+    background-color: var(--accent);
+    font-size:0.9rem;
+
+    border-radius: 100%;
+
+    font-weight: bolder;
+    user-select: none;
 }
 
 .primary-list li > p{
     display: inline-block;
 }
+
+
 
 .primary-list li > ul, .primary-list li > ol{
     margin-left: 3rem;
